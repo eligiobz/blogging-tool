@@ -66,11 +66,10 @@ function copyrightString() {
 app.get("/", (req, res) => {
   Post.find({}, (err, posts) => {
     if (!err){
+      //TODO: Better sending of the post information to the site
       res.render("home", { postData: homeStartingContent, posts: posts, copyString: copyrightString() });
     }
   });
-
-  
 });
 
 /// About GET
@@ -118,13 +117,8 @@ app.get("/posts/:postId", (req, res) => {
       }
     }
   })
-  // post = Posts.find(
-  //       (post) => post._id === req.params.postId
-  // );
-  // console.log(post);
-  
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+app.listen(process.env.PORT || 3000, function () {
+  console.log("Server started on port " + (process.env.PORT || 3000));
 });

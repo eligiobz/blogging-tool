@@ -1,6 +1,11 @@
 html {
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 70%, rgba(248,248,250,1) 85%, rgba(32,48,98,1) 100%); 
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 70%,
+    rgba(248, 248, 250, 1) 85%,
+    rgba(32, 48, 98, 1) 100%
+  );
   background-repeat: no-repeat;
   height: 100%;
 }
