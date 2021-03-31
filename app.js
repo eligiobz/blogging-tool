@@ -31,19 +31,24 @@ const Tag = mongoose.model("Tag", tagSchema);
 const postSchema = {
   title: {
     type: String,
-    required: [true, "Needs Title"],
+    required: [true, "No Title"],
   },
   content: {
     type: String,
-    required: [true, "Needs"],
+    required: [true, "No content"],
+  },
+  postDate: {
+    type: Date,
+    required: [true, "No Date"]
   },
   tags: [tagSchema]
 };
 
 const Post = mongoose.model("Post", postSchema);
 
-const homeStartingContent =
-  "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
+const homeStartingContent = "Este es mi blog. Lo actualizado esporadicamente :)\n\n " +
+"Algunos de los temas que trato son [programacion](/programming)\n\n " +
+"[webdev](/webdev) y otros temas no tecnologicos";
 const  contactContent =
   "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const aboutContent =
@@ -64,12 +69,12 @@ function copyrightString() {
 
 /// Home GET
 app.get("/", (req, res) => {
-  Post.find({}, (err, posts) => {
+  Post.find({ title: {$nin: ["__about", "__contact"]} }, (err, posts) => {
     if (!err){
       //TODO: Better sending of the post information to the site
-      res.render("home", { postData: homeStartingContent, posts: posts, copyString: copyrightString() });
+      res.render("home", { postData: md.render(homeStartingContent), posts: posts, copyString: copyrightString() });
     }
-  });
+  }).limit(1);
 });
 
 /// About GET
@@ -111,6 +116,7 @@ app.get("/posts/:postId", (req, res) => {
   Post.findById(req.params.postId, (err, post) => {
     if (!err){
       if (post) {
+        post.content = md.render(post.content);
         res.render("post", { post: post, copyString: copyrightString() });
       } else {
         res.redirect("/");
