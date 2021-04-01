@@ -74,7 +74,7 @@ app.get("/", (req, res) => {
       //TODO: Better sending of the post information to the site
       res.render("home", { postData: md.render(homeStartingContent), posts: posts, copyString: copyrightString() });
     }
-  }).limit(1);
+  })/*.limit(1)*/;
 });
 
 /// About GET

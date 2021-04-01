@@ -1,7 +1,7 @@
 <%- include("partials/header") %> 
 
 <% posts.forEach( (post) => { %>
-<h1><a href="/posts/<%= post._id %>"><%= post.title %></a></h1>
+<a href="/posts/<%= post._id %>"><h1><%= post.title %> <i class="fas fa-arrow-circle-right fas-title"></i> </h1> </a>
 <p><%= post.content.substring(0,99) %> ... <a href="/posts/<%= post._id %>">Read More</a></p>
 <% }) %>
 
