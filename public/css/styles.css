@@ -20,7 +20,7 @@ body {
   margin-left: 1rem;
 }
 
-.container-lg{
+.container-lg {
   height: 100%;
 }
 
@@ -59,7 +59,12 @@ body {
 
 /******************* footer section **********/
 
-.fixed-row-bottom { position: fixed; bottom: 0; margin-left: auto; margin-right: auto;}
+.fixed-row-bottom {
+  position: fixed;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .footer {
   text-align: center;
@@ -72,17 +77,15 @@ body {
   width: 100%;
 }
 
-
 /*************** end footer ***************/
 
 /************** smaller screens *************/
 
-@media(max-width: 1199px){
-  .rightside{
+@media (max-width: 1199px) {
+  .rightside {
     display: none;
   }
 }
-
 
 /* .container-fluid {
   padding-top: 70px;
@@ -108,10 +111,6 @@ body {
 .navbar-nav li a:hover {
   color: #1abc9c !important;
 }
-
-
-
-
 
 .sidebar {
   display: block;
