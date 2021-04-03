@@ -14,7 +14,7 @@ const user = process.env.MONGO_USR;
 const passwd = process.env.MONGO_PWD;
 const db = process.env.MONGO_DB;
 
-console.log(user + " " + passwd + " " + db);
+console.log("user :: " + user + " || passwd :: " + passwd + " || db :: " + db);
 
 mongoose.connect(
   "mongodb+srv://" +
