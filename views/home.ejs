@@ -1,10 +1,9 @@
 <%- include("partials/header") %> 
-<%- include("partials/rightside") %> 
 <div class="col-xl">
 <% posts.forEach( (post) => { %>
 <a href="/posts/<%= post._id %>"><h1><%= post.title %> <i class="fas fa-arrow-circle-right fas-title"></i> </h1> </a>
-<p><%= post.content.substring(0,99) %> ... <a href="/posts/<%= post._id %>">Read More</a></p>
+<p><%- post.content %></p>
 <% }) %>
 </div>
-<%- include("partials/leftside") %> 
+<%- include("partials/sidea") %> 
 <%- include("partials/footer") %> 

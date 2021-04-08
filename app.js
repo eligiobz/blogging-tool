@@ -58,20 +58,7 @@ var rightside = "";
 
 Post.findOne({ title: "__rightSide" }, (err, post) => {
   if (!err) {
-    console.log(post);
     rightside = md.render(post.content);
-  } else {
-    console.log("no such post");
-    return null;
-  }
-});
-
-var leftside = "";
-
-Post.findOne({ title: "__rightSide" }, (err, post) => {
-  if (!err) {
-    console.log(post);
-    leftside = md.render(post.content);
   } else {
     console.log("no such post");
     return null;
@@ -113,7 +100,9 @@ app.get("/", (req, res) => {
     (err, posts) => {
       if (!err) {
         //TODO: Better sending of the post information to the site
-        console.log(rightside);
+        posts.forEach( post => {
+          post.content = md.render(post.content)
+        });
         res.render("home", {
           posts: posts,
           copyString: copyrightString(),
@@ -121,7 +110,7 @@ app.get("/", (req, res) => {
         });
       }
     }
-  ) /*.limit(1)*/;
+  ).sort({_id:-1}).limit(10);
 });
 
 /// About GET
